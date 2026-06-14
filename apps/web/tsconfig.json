@@ -3,6 +3,7 @@
   "compilerOptions": {
     "allowJs": false,
     "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "jsx": "preserve",
     "noEmit": true,
     "paths": {
