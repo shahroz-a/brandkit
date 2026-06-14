@@ -22,7 +22,7 @@ npm run dev
 
 Open the local URL printed by Next.js. The app stores kits in the browser and exports assets locally.
 
-The repository also includes `pnpm-workspace.yaml` and a `packageManager` field for pnpm-based contributors:
+The repository also includes `pnpm-workspace.yaml` for pnpm-based contributors, while npm remains the default package manager for CI and Vercel:
 
 ```bash
 corepack enable

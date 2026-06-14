@@ -4,7 +4,7 @@
   "private": true,
   "description": "Open-source developer branding toolkit for deterministic brand assets.",
   "license": "MIT",
-  "packageManager": "pnpm@10.12.1",
+  "packageManager": "npm@11.12.1",
   "engines": {
     "node": ">=20.9.0"
   },
@@ -26,6 +26,7 @@
   "devDependencies": {
     "@types/node": "^24.0.0",
     "prettier": "^3.5.0",
+    "turbo": "^2.7.4",
     "tsx": "^4.20.0",
     "typescript": "^5.9.2",
     "vitest": "^3.2.0"
