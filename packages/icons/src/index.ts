@@ -1,0 +1,1 @@
+export const brandkitSymbol = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img"><rect width="64" height="64" rx="16" fill="currentColor"/><path d="M16 46c4-20 28-20 32 0l-16-6-16 6Z" fill="white" opacity=".28"/><path d="M21 34h22v8H21z" fill="white"/></svg>`;

@@ -1,0 +1,33 @@
+{
+  "name": "brandkit-os",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Open-source developer branding toolkit for deterministic brand assets.",
+  "license": "MIT",
+  "packageManager": "pnpm@10.12.1",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "dev": "npm run build:packages && npm run dev -w @brandkit/web",
+    "build": "npm run build:packages && npm run build -w @brandkit/web",
+    "build:packages": "npm run build -w @brandkit/core -w @brandkit/icons -w @brandkit/plugins -w @brandkit/presets -w @brandkit/templates -w @brandkit/sdk -w @brandkit/react -w @brandkit/cli",
+    "check": "npm run check --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "brandkit": "tsx packages/cli/src/index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "prettier": "^3.5.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.0"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "@brandkit/react",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "React components for BrandKit OS previews.",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./src/index.tsx",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./src/index.tsx",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@brandkit/core": "file:../core"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0"
+  }
+}

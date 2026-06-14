@@ -1,0 +1,31 @@
+{
+  "name": "@brandkit/cli",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "BrandKit OS command line interface.",
+  "license": "MIT",
+  "bin": {
+    "brandkit": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@brandkit/core": "file:../core",
+    "jszip": "^3.10.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0"
+  }
+}

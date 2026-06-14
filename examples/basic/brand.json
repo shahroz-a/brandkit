@@ -1,0 +1,13 @@
+{
+  "name": "Acme Studio",
+  "description": "Beautiful launch assets from versioned brand tokens.",
+  "font": "Inter",
+  "radius": 22,
+  "primary": "#2563EB",
+  "secondary": "#111827",
+  "accent": "#F97316",
+  "background": "#F8FAFC",
+  "foreground": "#111827",
+  "mode": "light",
+  "theme": "modern"
+}
