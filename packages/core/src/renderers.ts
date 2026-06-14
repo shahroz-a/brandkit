@@ -193,7 +193,7 @@ function fitText(text: string, maxWidth: number, preferred: number, minimum: num
 }
 
 function fontStack(font: string): string {
-  return `${escapeHtml(font)}, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`;
+  return `${escapeHtml(font)}, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`;
 }
 
 function sparkPath(x: number, y: number, size: number): string {

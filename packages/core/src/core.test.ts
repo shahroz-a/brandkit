@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { generateBrandAssets, normalizeBrandTokens, parseBatchInput, validateBrandTokens } from ".";
+import { generateBrandAssets, normalizeBrandTokens, parseBatchInput, renderOpenGraphSvg, validateBrandTokens } from ".";
 
 describe("BrandKit core", () => {
   it("normalizes partial tokens deterministically", () => {
@@ -14,6 +14,12 @@ describe("BrandKit core", () => {
     expect(assets.some((asset) => asset.filename === "og-image.svg")).toBe(true);
     expect(assets.some((asset) => asset.filename === "site.webmanifest")).toBe(true);
     expect(assets.length).toBeGreaterThan(20);
+  });
+
+  it("renders SVG font attributes without unescaped double quotes", () => {
+    const svg = renderOpenGraphSvg({ name: "Acme Studio", font: "Inter" });
+    expect(svg).toContain("font-family=\"Inter, Inter");
+    expect(svg).not.toContain("\"Segoe UI\"");
   });
 
   it("reports invalid source colors", () => {
