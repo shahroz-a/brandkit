@@ -9,6 +9,7 @@ brandkit sync
 brandkit doctor
 brandkit validate
 brandkit batch brands.csv
+brandkit mcp
 ```
 
 ## Commands
@@ -21,6 +22,7 @@ brandkit batch brands.csv
 - `doctor` validates tokens and scans for missing project assets.
 - `validate` validates `brand.json`.
 - `batch` generates one kit per CSV, TSV, or JSON row.
+- `mcp` prints a JSON tool manifest for self-hosted MCP or LLM tool adapters.
 
 ## Batch CSV
 
@@ -28,3 +30,13 @@ brandkit batch brands.csv
 name,description,primary,secondary,accent
 Acme,Ship better software,#2563EB,#111827,#F97316
 ```
+
+Optional columns include `logoSource`, `logoDataUri`, `logoShape`, `logoStyle`, `metaGradient`, `metaPattern`, `metaPatternScale`, `metaIntensity`, and `metaLayout`.
+
+## LLM/MCP
+
+```bash
+brandkit mcp > brandkit-tools.json
+```
+
+Use the manifest with your own hosted adapter. BrandKit OS is local-first and does not provide a hosted MCP server, auth layer, storage, or public generation API.

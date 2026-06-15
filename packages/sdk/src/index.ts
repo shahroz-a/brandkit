@@ -1,13 +1,19 @@
 import {
   generateBrandAssets,
+  getBrandKitToolManifest,
   normalizeBrandTokens,
   renderFaviconSvg,
   renderLogoSvg,
   renderManifest,
   renderOpenGraphSvg,
-  validateBrandTokens
+  validateBrandTokens,
 } from "@brandkit/core";
-import type { BrandAsset, BrandTokens, RenderSize, ValidationReport } from "@brandkit/core";
+import type {
+  BrandAsset,
+  BrandTokens,
+  RenderSize,
+  ValidationReport,
+} from "@brandkit/core";
 
 export interface GenerateOgOptions extends Partial<BrandTokens> {
   width?: number;
@@ -25,11 +31,17 @@ export function generateOG(options: GenerateOgOptions): string {
   return renderOpenGraphSvg(tokens, { width, height } satisfies RenderSize);
 }
 
-export function generateLogo(options: Partial<BrandTokens>, variant: "icon" | "horizontal" | "vertical" = "icon"): string {
+export function generateLogo(
+  options: Partial<BrandTokens>,
+  variant: "icon" | "horizontal" | "vertical" = "icon",
+): string {
   return renderLogoSvg(options, variant);
 }
 
-export function generateFavicon(options: Partial<BrandTokens>, size = 64): string {
+export function generateFavicon(
+  options: Partial<BrandTokens>,
+  size = 64,
+): string {
   return renderFaviconSvg(options, size);
 }
 
@@ -37,14 +49,27 @@ export function generateWebManifest(options: Partial<BrandTokens>): string {
   return renderManifest(options);
 }
 
-export function generateBrandKit(options: Partial<BrandTokens>): BrandKitBundle {
+export function generateBrandKit(
+  options: Partial<BrandTokens>,
+): BrandKitBundle {
   const tokens = normalizeBrandTokens(options);
   return {
     tokens,
     assets: generateBrandAssets(tokens),
-    validation: validateBrandTokens(options)
+    validation: validateBrandTokens(options),
   };
 }
 
-export { generateBrandAssets, normalizeBrandTokens, validateBrandTokens };
-export type { BrandAsset, BrandTokens, ValidationIssue, ValidationReport } from "@brandkit/core";
+export {
+  generateBrandAssets,
+  getBrandKitToolManifest,
+  normalizeBrandTokens,
+  validateBrandTokens,
+};
+export type {
+  BrandAsset,
+  BrandKitToolDefinition,
+  BrandTokens,
+  ValidationIssue,
+  ValidationReport,
+} from "@brandkit/core";

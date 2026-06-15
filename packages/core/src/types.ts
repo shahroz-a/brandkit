@@ -1,5 +1,24 @@
 export type BrandMode = "light" | "dark";
 
+export type LogoSource = "generated" | "uploaded";
+export type LogoShape = "squircle" | "circle" | "hex" | "diamond";
+export type LogoStyle = "spark" | "initials" | "monogram" | "badge";
+export type MetaGradient =
+  | "brand"
+  | "aurora"
+  | "mesh"
+  | "radial"
+  | "linear"
+  | "solid";
+export type MetaPattern =
+  | "none"
+  | "dots"
+  | "grid"
+  | "diagonal"
+  | "waves"
+  | "plus";
+export type MetaLayout = "classic" | "centered" | "split" | "poster";
+
 export type BrandTheme =
   | "minimal"
   | "glass"
@@ -35,6 +54,15 @@ export interface BrandTokens {
   foreground: string;
   mode: BrandMode;
   theme: BrandTheme;
+  logoSource: LogoSource;
+  logoDataUri?: string;
+  logoShape: LogoShape;
+  logoStyle: LogoStyle;
+  metaGradient: MetaGradient;
+  metaPattern: MetaPattern;
+  metaPatternScale: number;
+  metaIntensity: number;
+  metaLayout: MetaLayout;
 }
 
 export interface BrandAsset {
@@ -90,6 +118,15 @@ export interface BatchRow {
   foreground?: string;
   mode?: BrandMode;
   theme?: BrandTheme;
+  logoSource?: LogoSource;
+  logoDataUri?: string;
+  logoShape?: LogoShape;
+  logoStyle?: LogoStyle;
+  metaGradient?: MetaGradient;
+  metaPattern?: MetaPattern;
+  metaPatternScale?: number;
+  metaIntensity?: number;
+  metaLayout?: MetaLayout;
 }
 
 export interface BatchParseResult {
