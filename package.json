@@ -16,6 +16,7 @@
   "scripts": {
     "dev": "npm run build:packages && npm run dev -w @brandkit/web",
     "build": "npm run build:packages && npm run build -w @brandkit/web",
+    "build:cloudflare": "npm run build:packages && CLOUDFLARE_BUILD=1 npm run build -w @brandkit/web",
     "build:packages": "npm run build -w @brandkit/core -w @brandkit/icons -w @brandkit/plugins -w @brandkit/presets -w @brandkit/templates -w @brandkit/sdk -w @brandkit/react -w @brandkit/cli",
     "check": "npm run check --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
