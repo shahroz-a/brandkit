@@ -14,6 +14,7 @@ import {
   Code2,
   Copy as CopyIcon,
   Download,
+  ExternalLink,
   FileJson,
   FolderSync,
   Globe2,
@@ -620,7 +621,46 @@ export function BrandKitApp() {
           )}
         </section>
       </div>
+      <AppFooter />
     </main>
+  );
+}
+
+function AppFooter() {
+  return (
+    <footer className="mt-8 border-t border-line">
+      <div className="mx-auto flex max-w-[1680px] flex-col gap-3 px-4 py-7 text-sm font-semibold text-[#334155] sm:flex-row sm:items-center sm:justify-between lg:px-6">
+        <p>
+          Built by{" "}
+          <a
+            className="font-black text-ink transition hover:text-[#2563EB]"
+            href="https://shahrozahmad.com"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Shahroz
+          </a>{" "}
+          from{" "}
+          <a
+            className="font-black text-ink transition hover:text-[#2563EB]"
+            href="https://aierlabs.com"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Aier Labs
+          </a>
+        </p>
+        <a
+          className="inline-flex items-center gap-1.5 font-bold text-[#334155] transition hover:text-[#2563EB]"
+          href="https://github.com/shahroz-a/brandkit/issues"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Issues and PRs
+          <ExternalLink size={16} aria-hidden="true" />
+        </a>
+      </div>
+    </footer>
   );
 }
 
