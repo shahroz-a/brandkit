@@ -30,6 +30,30 @@ pnpm install
 pnpm --filter @brandkit/web dev
 ```
 
+## Deployment
+
+### Vercel
+
+Use the default root build command:
+
+```bash
+npm run build
+```
+
+### Cloudflare Pages
+
+BrandKit OS is a static Next.js app on Cloudflare Pages. Use these build settings from the repository root:
+
+```text
+Build command: npm run build:cloudflare
+Build output directory: apps/web/out
+Deploy command: leave blank
+```
+
+Cloudflare Pages sets `CF_PAGES=1`, and Cloudflare Workers Builds sets `WORKERS_CI=1`, so the default `npm run build` will emit the same static export during Cloudflare builds. If a deploy command is configured for Pages, do not use `npx wrangler deploy` from the workspace root; Pages should upload `apps/web/out` directly.
+
+For Cloudflare Workers Builds that run `npx wrangler deploy`, the checked-in `wrangler.toml` and `apps/web/worker.ts` serve the same static export through Workers static assets.
+
 ## CLI
 
 ```bash
