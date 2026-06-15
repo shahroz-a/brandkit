@@ -52,6 +52,8 @@ Deploy command: leave blank
 
 Cloudflare Pages also sets `CF_PAGES=1`, so the default `npm run build` will emit the same static export during Pages builds. If a deploy command is configured, do not use `npx wrangler deploy` from the workspace root; Pages should upload `apps/web/out` directly.
 
+For Cloudflare Workers Builds that run `npx wrangler deploy`, the checked-in `wrangler.toml` and `apps/web/worker.ts` serve the same static export through Workers static assets.
+
 ## CLI
 
 ```bash
