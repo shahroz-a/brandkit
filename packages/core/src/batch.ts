@@ -1,4 +1,14 @@
-import type { BatchParseResult, BatchRow, BrandMode, BrandTheme } from "./types.js";
+import type {
+  BatchParseResult,
+  BatchRow,
+  BrandMode,
+  BrandTheme,
+  LogoShape,
+  LogoStyle,
+  MetaGradient,
+  MetaLayout,
+  MetaPattern,
+} from "./types.js";
 
 const KNOWN_COLUMNS = new Set([
   "name",
@@ -11,7 +21,16 @@ const KNOWN_COLUMNS = new Set([
   "background",
   "foreground",
   "mode",
-  "theme"
+  "theme",
+  "logoSource",
+  "logoDataUri",
+  "logoShape",
+  "logoStyle",
+  "metaGradient",
+  "metaPattern",
+  "metaPatternScale",
+  "metaIntensity",
+  "metaLayout",
 ]);
 
 export function parseBatchInput(raw: string): BatchParseResult {
@@ -41,10 +60,18 @@ function parseJson(input: string): BatchParseResult {
 
     return {
       rows: normalized,
-      errors: normalized.length === rows.length ? [] : ["Some JSON rows were not objects and were skipped."]
+      errors:
+        normalized.length === rows.length
+          ? []
+          : ["Some JSON rows were not objects and were skipped."],
     };
   } catch (error) {
-    return { rows: [], errors: [`Invalid JSON: ${error instanceof Error ? error.message : "Unable to parse input."}`] };
+    return {
+      rows: [],
+      errors: [
+        `Invalid JSON: ${error instanceof Error ? error.message : "Unable to parse input."}`,
+      ],
+    };
   }
 }
 
@@ -56,7 +83,9 @@ function parseDelimited(input: string): BatchParseResult {
 
   const headerLine = lines[0] ?? "";
   const delimiter = headerLine.includes("\t") ? "\t" : ",";
-  const headers = splitRow(headerLine, delimiter).map((header) => header.trim());
+  const headers = splitRow(headerLine, delimiter).map((header) =>
+    header.trim(),
+  );
   const unknownColumns = headers.filter((header) => !KNOWN_COLUMNS.has(header));
   const rows = lines.slice(1).map((line, index) => {
     const values = splitRow(line, delimiter);
@@ -69,15 +98,27 @@ function parseDelimited(input: string): BatchParseResult {
 
   return {
     rows,
-    errors: unknownColumns.length > 0 ? [`Unknown columns ignored: ${unknownColumns.join(", ")}`] : []
+    errors:
+      unknownColumns.length > 0
+        ? [`Unknown columns ignored: ${unknownColumns.join(", ")}`]
+        : [],
   };
 }
 
 function recordToRow(record: Record<string, unknown>, index: number): BatchRow {
   const row: BatchRow = {
-    name: toStringValue(record.name) || `Brand ${index + 1}`
+    name: toStringValue(record.name) || `Brand ${index + 1}`,
   };
-  const stringFields = ["description", "font", "primary", "secondary", "accent", "background", "foreground"] as const;
+  const stringFields = [
+    "description",
+    "font",
+    "primary",
+    "secondary",
+    "accent",
+    "background",
+    "foreground",
+    "logoDataUri",
+  ] as const;
 
   for (const field of stringFields) {
     const value = toOptionalString(record[field]);
@@ -95,9 +136,48 @@ function recordToRow(record: Record<string, unknown>, index: number): BatchRow {
     row.mode = record.mode as BrandMode;
   }
 
+  if (record.logoSource === "generated" || record.logoSource === "uploaded") {
+    row.logoSource = record.logoSource;
+  }
+
+  const logoShape = toOptionalString(record.logoShape);
+  if (logoShape) {
+    row.logoShape = logoShape as LogoShape;
+  }
+
+  const logoStyle = toOptionalString(record.logoStyle);
+  if (logoStyle) {
+    row.logoStyle = logoStyle as LogoStyle;
+  }
+
+  const metaGradient = toOptionalString(record.metaGradient);
+  if (metaGradient) {
+    row.metaGradient = metaGradient as MetaGradient;
+  }
+
+  const metaPattern = toOptionalString(record.metaPattern);
+  if (metaPattern) {
+    row.metaPattern = metaPattern as MetaPattern;
+  }
+
+  const metaLayout = toOptionalString(record.metaLayout);
+  if (metaLayout) {
+    row.metaLayout = metaLayout as MetaLayout;
+  }
+
   const theme = toOptionalString(record.theme);
   if (theme) {
     row.theme = theme as BrandTheme;
+  }
+
+  const metaPatternScale = toOptionalNumber(record.metaPatternScale);
+  if (metaPatternScale !== undefined) {
+    row.metaPatternScale = metaPatternScale;
+  }
+
+  const metaIntensity = toOptionalNumber(record.metaIntensity);
+  if (metaIntensity !== undefined) {
+    row.metaIntensity = metaIntensity;
   }
 
   return row;
@@ -112,13 +192,13 @@ function splitRow(line: string, delimiter: string): string[] {
     const char = line[index];
     const next = line[index + 1];
 
-    if (char === "\"" && quoted && next === "\"") {
-      current += "\"";
+    if (char === '"' && quoted && next === '"') {
+      current += '"';
       index += 1;
       continue;
     }
 
-    if (char === "\"") {
+    if (char === '"') {
       quoted = !quoted;
       continue;
     }
