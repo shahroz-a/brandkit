@@ -20,7 +20,7 @@
     "next": "^16.2.9",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "react-hook-form": "^7.0.0",
+    "react-hook-form": "^7.80.0",
     "zod": "^4.0.0",
     "zustand": "^5.0.0"
   },
